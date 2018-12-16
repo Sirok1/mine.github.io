@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://sirok1.github.io/mine.github.io">
-  <title>Archives: 2018/12 | Hexo</title>
+  <title>game trade Demo | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://sirok1.github.io/mine.github.io/archives/2018/12/index.html">
+  <meta name="description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; #include &amp;lt;string.h&amp;gt; int propCount = 0;int playerCount = 0;/    模拟实现道具点购物功能    商品具备名称、价格、库存等属性    模拟玩家购买道具    1、玩家选择要购买的道具    2、玩家同意交易后扣除相应游戏币">
+<meta property="og:type" content="article">
+<meta property="og:title" content="game trade Demo">
+<meta property="og:url" content="https://sirok1.github.io/mine.github.io/2018/12/16/game-trade-Demo/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; #include &amp;lt;string.h&amp;gt; int propCount = 0;int playerCount = 0;/    模拟实现道具点购物功能    商品具备名称、价格、库存等属性    模拟玩家购买道具    1、玩家选择要购买的道具    2、玩家同意交易后扣除相应游戏币">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-16T12:10:15.582Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="game trade Demo">
+<meta name="twitter:description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; #include &amp;lt;string.h&amp;gt; int propCount = 0;int playerCount = 0;/    模拟实现道具点购物功能    商品具备名称、价格、库存等属性    模拟玩家购买道具    1、玩家选择要购买的道具    2、玩家同意交易后扣除相应游戏币">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,103 +154,183 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-game-trade-Demo" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      game trade Demo
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/mine.github.io/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/mine.github.io/2018/12/16/game-trade-Demo/" class="archive-article-date">
+
+        
+        <a href="/mine.github.io/2018/12/16/game-trade-Demo/" class="archive-article-date">
   	<time datetime="2018-12-16T12:08:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-16</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/mine.github.io/2018/12/16/game-trade-Demo/">game trade Demo</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#include &lt;stdio.h&gt;</p>
+<p>#include &lt;stdlib.h&gt;</p>
+<p>#include &lt;string.h&gt;</p>
+<p>int propCount = 0;<br>int playerCount = 0;<br>/<em><br>    模拟实现道具点购物功能<br>    商品具备名称、价格、库存等属性<br>    模拟玩家购买道具<br>    1、玩家选择要购买的道具<br>    2、玩家同意交易后扣除相应游戏币<br>    3、对应商品库存 -1
+    </em>4、玩家背包中增加商品或该商品数量+1<br>*/</p>
+<p>typedef struct _prop        //商品结构<br>{<br>    int id;         //道具的唯一编号<br>    char name[50];  //道具名称<br>    double price;   //道具单价<br>    int stock;      //库存量<br>    char desc[200]; //道具描述</p>
+<p>}Prop;</p>
+<p>typedef struct _bag         //背包结构<br>{<br>    int playerId;   //当前所属玩家编号<br>    int count;      //当前背包中，道具的数量<br>    int max;        //当前背包的插槽总数<br>    Prop props[8];  //当前背包中的道具数组<br>}Bag;</p>
+<p>typedef struct _player      //玩家结构<br>{<br>    int id;             //玩家编号<br>    char name[50];      //用户名<br>    char pass[50];      //密码<br>    Bag bag;            //玩家背包<br>    double gold;        //玩家金币<br>}Player;</p>
+<p>Prop <em>props;<br>Player </em>players;</p>
+<p>void Init();<br>void ShowProps();<br>void ShowPlayers();<br>void Trade(Player *player, int propId);</p>
+<p>int main()<br>{<br>    Init();             //初始化数据<br>    printf(“<strong><strong><strong>**</strong></strong></strong>交易前<strong><strong><strong><strong><strong>*</strong></strong></strong></strong></strong>\n”);<br>    ShowProps();<br>                                                                        //2、打印这些初始化数据<br>    ShowPlayers();<br>    Trade(&amp;players[0], 3);<br>    Trade(&amp;players[0], 4);<br>    Trade(&amp;players[0], 5);</p>
+<pre><code>printf(&quot;****************交易后*******************\n&quot;);
+ShowProps();
+                                                                    //2、打印这些初始化数据
+ShowPlayers();
 
-        <div class="article-info info-on-right">
-          
-          
+return 0;
+</code></pre><p>}</p>
+<p>/*<em>
+ </em>交易函数<br> <em>参数1：参与交易的玩家指针 - 方便以后修改玩家交易后的金币
+ </em>参数2：玩家购买的商品id<br> <em>
+ </em>/<br>void Trade(Player <em>player, int propId)<br>{<br>    int i;<br>    //需要判断：商品的库存， 玩家余额够不够，玩家背包空间够不够<br>    Prop </em>tradeProp = NULL;//要购买的商品的指针<br>    for(i = 0; i &lt; propCount; i++)<br>    {<br>        if(propId == props[i].id)<br>        {<br>            tradeProp = &amp;props[i];<br>            break;<br>        }<br>    }<br>    if(tradeProp-&gt;stock &lt;= 0)<br>    {<br>        printf(“地主家都没有余粮！商店都被买空了！\n”);<br>        return;<br>    }<br>    if(player-&gt;gold &lt; tradeProp-&gt;price)<br>    {<br>        printf(“钱包都是瘪的。这里可是看钱的社会！！\n”);<br>        return;<br>    }<br>    if(player-&gt;bag.count &gt;= player-&gt;bag.max)<br>    {<br>        printf(“背包已满，交易失败！\n”);<br>        return;<br>    }<br>    //满足交易条件，执行交易的业务操作|<br>    //1、商品库存-1<br>    tradeProp-&gt;stock–;<br>    //2、玩家金币-商品价格<br>    player-&gt;gold -= tradeProp-&gt;price;<br>    //3、玩家背包道具增加<br>    //判断玩家背包中是否已有该商品|<br>    //如果没有该商品，该商品添加到背包中即可<br>    //如果有该商品，背包中的该商品总数+1<br>    for(i = 0; i &lt; player-&gt;bag.count; i++)<br>    {<br>        if(propId == player-&gt;bag.props[i].id)<br>        {<br>            player-&gt;bag.props[i].stock++;<br>            break;<br>        }<br>    }<br>    if(i == player-&gt;bag.count)<br>    {<br>        //向背包中创建一个商品-复制一份要交易的商品信息到背包中<br>        player-&gt;bag.props[player-&gt;bag.count].id = tradeProp-&gt;id;<br>        player-&gt;bag.props[player-&gt;bag.count].price = tradeProp-&gt;price;<br>        player-&gt;bag.props[player-&gt;bag.count].stock = 1;<br>        strcpy(player-&gt;bag.props[player-&gt;bag.count].name, tradeProp-&gt;name);<br>        strcpy(player-&gt;bag.props[player-&gt;bag.count].desc, tradeProp-&gt;desc);<br>        player-&gt;bag.count++;<br>    }<br>}</p>
+<p>void Init()<br>{<br>     //1、初始化数据<br>    static Prop propArray[] = {<br>        {<br>            1, “双倍经验卡”, 3000, 10, “双击666”<br>        },<br>        {<br>            2, “腐烂的道袍”, 5000, 8, “只可远观不可亵玩”<br>        },<br>        {<br>            3, “生锈的铁剑”, 8000, 10, “新手专用”<br>        },<br>        {<br>            4, “无极袍”, 13000, 5, “刀枪不入，水火不侵”<br>        },<br>        {<br>            5, “直升1级丹”, 83000, 10, “吃了以后保准还想再吃再吃再吃。。。”<br>        },<br>    };<br>    static Player playerArray[]=<br>    {<br>      {1, “超级毛毛虫”, “123456”, .gold = 100050000, .bag.max = 8, .bag.count = 0},<br>      {2, “塔罗奥特曼”, “123456”, .gold = 150000, .bag.max = 8, .bag.count = 0},<br>      {3, “元始天尊之徒”, “123456”, .gold = 500000, .bag.max = 8, .bag.count = 0},<br>      {4, “星河”, “123456”, .gold = 1150000, .bag.max = 8, .bag.count = 0},<br>    };<br>    propCount = 5;<br>    playerCount = 4;<br>    props = propArray;<br>    players = playerArray;<br>}<br>void ShowProps()<br>{<br>    int i;<br>    if(props == NULL) return;<br>    printf(“%-5s\t%-13s\t%-10s\t库存\t\t商品介绍\n\n”, “编号”, “名称”, “单价”);<br>    for(i = 0; i &lt; propCount; i++)<br>    {<br>        printf(“%-5d\t%-13s\t%-10.2lf\t%d\t\t%s\n”,props[i].id, props[i].name, props[i].price, props[i].stock, props[i].desc);</p>
+<pre><code>}
+printf(&quot;\n\n&quot;);
+//printf(&quot;玩家的背包数据如下：&quot;);
+</code></pre><p>}<br>void ShowPlayers()<br>{<br>    int i, j;<br>    if(players == NULL) return;<br>    printf(“%-5s\t%-10s\t%-10s\t%s\n\n”, “ID”, “名称”, “密码”, “金币”);<br>    for(i = 0; i &lt; playerCount; i++)<br>    {<br>        printf(“%-5d\t%-10s\t%-10s\t%.2lf\n”,players[i].id, players[i].name, players[i].pass, players[i].gold);<br>        printf(“背包：\n”);<br>        for(j = 0 ; j &lt; players[i].bag.count; j++)<br>        {<br>        printf(“\t%s\t%d\n”,players[i].bag.props[j].name, players[i].bag.props[j].stock);<br>        }<br>        printf(“\n\n”);<br>    }<br>}<br>//交易了商品</p>
 
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://sirok1.github.io/mine.github.io/2018/12/16/game-trade-Demo/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/mine.github.io/2018/12/05/12354645/" class="archive-article-date">
-  	<time datetime="2018-12-05T14:17:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-05</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/mine.github.io/2018/12/05/12354645/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">12354645</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/mine.github.io/2018/12/05/12354645/">12354645</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/mine.github.io/2018/12/05/hello-world/" class="archive-article-date">
-  	<time datetime="2018-12-05T11:14:11.893Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/mine.github.io/2018/12/05/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -269,8 +353,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
